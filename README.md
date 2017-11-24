@@ -2,7 +2,7 @@
 
 Use Requirement from :
 
-https://github.com/ballweera/geek-contack
+https://github.com/ballweera/geek-contact
 
 README.md :
 ====================================================================
@@ -13,3 +13,5 @@ Instruction Guide Prefer:
 4. Develop PUT /contact/:id API to update contact information
 5. Develop DELETE /contacts/:id API to remove contact from list
 6. Develop GET /contacts?name= API to search contact by name
+
+more info : https://github.com/ballweera/geek-contact/blob/master/README.md
