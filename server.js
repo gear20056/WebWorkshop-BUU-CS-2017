@@ -42,7 +42,24 @@ app.post('/insertdata', function (req, res) {
 	});
 	res.send('success');
 });
-
+/************
+ * Find Data -> Database Mongodb
+ ************/
+app.post('/showdata', function (req, res) {
+	MongoClient.connect(url, function (err, db) {
+		if (err) throw err;
+		db.collection("webtech").find({}).toArray(function (err, results) {
+			let obj = [];
+			for (var i in results) {
+				obj[i] = results[i];
+			}
+			console.log('Show data');			
+			console.log(results);
+			db.close();
+			res.send(obj);
+		});
+	});
+});
 
 /************
  * Run localhost -> local:3000
