@@ -15,7 +15,7 @@ function isBlank(str) {
   return (!str || /^\s*$/.test(str));
 }
 /************
- * Setform To Empty
+ * Function Setform Empty
  ************/
 function emptyform() {
   $("#nameedit").val(" ");
@@ -27,7 +27,7 @@ function emptyform() {
   $("#email").val(" ");
 }
 /************
- * Search live in Contactlist 
+ * Function Search in Contactlist 
  ************/
 $("#filter").keyup(function () {
   var filter = $(this).val(),
@@ -41,7 +41,7 @@ $("#filter").keyup(function () {
   });
 });
 /************
- * Function Add Data to WebApplication
+ * Function Add Data
  ************/
 var data = {};
 var checknumber = false;
@@ -52,7 +52,7 @@ $("#telnum").keyup(function () {
     checknumber = true;
   } else {
     $("#alert").fadeIn("fast");
-    $("#alert").html('โปรดใส่ตัวเลขให้ครบสิบตัว');
+    $("#alert").html('โปรดใส่ตัวเลขให้ครบสิบตัวครับ');
   }
 });
 $("#add-contact").unbind().on("click", function (e) {
@@ -63,7 +63,7 @@ $("#add-contact").unbind().on("click", function (e) {
   var email = $("#email").val();
   if (checknumber == false && isBlank(name) && isBlank(surname) && isBlank(telnum) && isBlank(name) || isBlank(surname) || isBlank(telnum)) {
     swal({
-      title: "กรุณาใส่ข้อมูลให้ครบ",
+      title: "กรุณาใส่ข้อมูลให้ครบครับ",
       text: " ",
       icon: "warning",
       buttons: false,
@@ -100,7 +100,7 @@ $("#add-contact").unbind().on("click", function (e) {
   }
 });
 /************
- * Function Get Data From WebApplication
+ * Function Get Data
  ************/
 function showdata() {
   $("#list-contact").empty();
@@ -112,13 +112,13 @@ function showdata() {
     success: function (data) {
       for (var i in data) {
         //console.log(data[i].idContact);
-        $("#list-contact").append('<div class="col-md-6 my-1" id="test"><div class="card"><div class="card-header" id="text">' + data[i].Name + ' ' + data[i].Surname + '</div><div class="card-body"><h4>รายละเอียด</h4><p class="p-y-1">ชื่อ : ' + data[i].Name + '<br> นามสกุล : ' + data[i].Surname + '<br> เบอร์โทรศัพท์ : ' + data[i].Telnumber + '<br> อีเมล์ : ' + data[i].Email + '</p><div class="float-right"><button type="button" class="btn btn-info" onclick="editcontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i> แก่ไข</button>' + ' ' + '<button type="button" class="btn btn-danger" id="delete-contact" onclick="deletecontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-minus-square" aria-hidden="true"></i> ลบ</button></div></div></div></div>');
+        $("#list-contact").append('<div class="col-md-6 my-1" id="test"><div class="card"><div class="card-header" id="text"><i class="fa fa-user-circle" aria-hidden="true"></i> ' + data[i].Name + ' ' + data[i].Surname + '</div><div class="card-body"><h4><i class="fa fa-id-badge" aria-hidden="true"></i> รายละเอียด</h4><p class="p-y-1">ชื่อ : ' + data[i].Name + '<br> นามสกุล : ' + data[i].Surname + '<br> เบอร์โทรศัพท์ : ' + data[i].Telnumber + '<br> อีเมล์ : ' + data[i].Email + '</p><div class="float-right"><button type="button" class="btn btn-info" onclick="editcontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i> แก่ไข</button>' + ' ' + '<button type="button" class="btn btn-danger" id="delete-contact" onclick="deletecontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-minus-square" aria-hidden="true"></i> ลบ</button></div></div></div></div>');
       }
     }
   });
 }
 /************
- * Function Edit Data to WebApplication
+ * Function Edit Data
  ************/
 function editcontact(data) {
   $('#editcontact').modal('show');
@@ -148,7 +148,7 @@ function editcontact(data) {
         url: 'http://localhost:3000/editdata',
         success: function (data) {
           swal({
-            title: "แก้ไขข้อมูลสำเร็จ",
+            title: "แก้ไขข้อมูลสำเร็จครับ",
             text: " ",
             icon: "success",
             buttons: false,
@@ -166,4 +166,49 @@ function editcontact(data) {
       });
     }
   });
+}
+/************
+ * Function Delete Data
+ ************/
+function deletecontact(data) {
+  var datadelete = {};
+  //alert(data);
+  console.log(data);
+  datadelete.del = data;
+  swal({
+      title: "คุณต้องการลบรายชื่อ",
+      text: " ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+      buttons: {
+        cancel: "ยกเลิก",
+        catch: "ยืนยัน",
+      },
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(datadelete),
+          contentType: 'application/json',
+          url: 'http://localhost:3000/deletedata',
+          success: function (data) {
+            swal({
+              title: "รายชื่อถูกลบสำเร็จ",
+              text: " ",
+              icon: "success",
+              buttons: false,
+              timer: 2000,
+            }).then(function () {
+              $('#loading').modal('show');
+              setTimeout(function () {
+                $('#loading').modal('hide');
+                showdata();
+              }, 1200);
+            });
+          }
+        });
+      }
+    });
 }
