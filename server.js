@@ -1,4 +1,21 @@
 
+/************
+ * Readme
+ * First  -> You Need Install Node.js https://nodejs.org/en/
+ * Second -> git clone git@github.com:gear20056/WebWorkshop-BUU-CS-2017.git
+ * Third  -> npm install
+ * Use This Command Run node.js -> node server.js
+ * ************
+ * This WebApplication For Contact List contactlist.html and contactlist-action.js
+ * This Workshop For Webtechnology
+ * This WebApplication Use Mongodb 
+ * WebApplication Can Edit,Delete or Insert on Mogodb
+ * Id:58660111,58660043,57160667
+ ************/
+/**************************************/
+/************
+ * Config Node.js
+ ************/
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongo = require('mongodb');
@@ -12,7 +29,7 @@ app.use(function (req, res, next) {
 });
 
 /************
- * Connect -> Database Mongodb
+ * Config Connect To -> Database Mongodb
  ************/
 const MongoClient = require('mongodb').MongoClient,
 f = require('util').format,
@@ -37,7 +54,7 @@ app.post('/insertdata', function (req, res) {
 			Email: req.body.email
 		};
 		db.collection("webtech").insertOne(myobj, function (err, res) {
-			console.log("document inserted");
+			console.log("1 document inserted");
 			db.close();
 		});
 	});
@@ -104,3 +121,6 @@ app.post('/deletedata', function (req, res) {
  * Run localhost -> local:3000
  ************/
 app.listen(3000);
+/************
+ * End Webapplication Node.js
+ ************/

@@ -1,6 +1,7 @@
 /************
- * This Javascript Code For Contact List HTML5
+ * This Javascript Action Code For Contact List contactlist.html and server.js
  * This Workshop For Webtechnology
+ * WebApplication Can Edit,Delete or Insert on Mogodb
  * Id:58660111,58660043,57160667
  ************/
 /**************************************/
@@ -9,7 +10,7 @@
  ************/
 showdata();
 /************
- * Function Check Empty
+ * Function Check Empty 
  ************/
 function isBlank(str) {
   return (!str || /^\s*$/.test(str));
@@ -111,7 +112,6 @@ function showdata() {
     url: 'http://localhost:3000/showdata',
     success: function (data) {
       for (var i in data) {
-        //console.log(data[i].idContact);
         $("#list-contact").append('<div class="col-md-6 my-1" id="test"><div class="card"><div class="card-header" id="text"><i class="fa fa-user-circle" aria-hidden="true"></i> ' + data[i].Name + ' ' + data[i].Surname + '</div><div class="card-body"><h4><i class="fa fa-id-badge" aria-hidden="true"></i> รายละเอียด</h4><p class="p-y-1">ชื่อ : ' + data[i].Name + '<br> นามสกุล : ' + data[i].Surname + '<br> เบอร์โทรศัพท์ : ' + data[i].Telnumber + '<br> อีเมล์ : ' + data[i].Email + '</p><div class="float-right"><button type="button" class="btn btn-info" onclick="editcontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-pencil-square-o" aria-hidden="true" ></i> แก่ไข</button>' + ' ' + '<button type="button" class="btn btn-danger" id="delete-contact" onclick="deletecontact(' + '\'' + data[i].Telnumber + '\'' + ');"><i class="fa fa-minus-square" aria-hidden="true"></i> ลบ</button></div></div></div></div>');
       }
     }
@@ -123,7 +123,6 @@ function showdata() {
 function editcontact(data) {
   $('#editcontact').modal('show');
   var dataedit = {};
-  //alert(data);
   dataedit.edit = data;
   $("#edit-contact").unbind().on("click", function (e) {
     e.preventDefault;
@@ -172,8 +171,6 @@ function editcontact(data) {
  ************/
 function deletecontact(data) {
   var datadelete = {};
-  //alert(data);
-  console.log(data);
   datadelete.del = data;
   swal({
       title: "คุณต้องการลบรายชื่อ",
@@ -212,3 +209,6 @@ function deletecontact(data) {
       }
     });
 }
+/************
+ * End Javascript Action Code
+ ************/
