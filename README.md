@@ -1,4 +1,4 @@
-# WebWorkshop-BUU-BUU-CS-2017
+# WebWorkshop-BUU-CS-2017
 
 ### Use Requirement from :
 
