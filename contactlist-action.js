@@ -9,6 +9,38 @@
  ************/
 showdata();
 /************
+ * Function Check Empty
+ ************/
+function isBlank(str) {
+  return (!str || /^\s*$/.test(str));
+}
+/************
+ * Setform To Empty
+ ************/
+function emptyform() {
+  $("#nameedit").val(" ");
+  $("#surnameedit").val(" ");
+  $("#telnumedit").val(" ");
+  $("#name").val(" ");
+  $("#surname").val(" ");
+  $("#telnum").val(" ");
+  $("#email").val(" ");
+}
+/************
+ * Search live in Contactlist 
+ ************/
+$("#filter").keyup(function () {
+  var filter = $(this).val(),
+    count = 0;
+  $("#text,#test").each(function () {
+    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+      $(this).fadeOut();
+    } else {
+      $(this).show();
+    }
+  });
+});
+/************
  * Function Add Data to WebApplication
  ************/
 var data = {};
@@ -86,16 +118,52 @@ function showdata() {
   });
 }
 /************
- * Search live in Contactlist 
+ * Function Edit Data to WebApplication
  ************/
-$("#filter").keyup(function () {
-  var filter = $(this).val(),
-    count = 0;
-  $("#text,#test").each(function () {
-    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-      $(this).fadeOut();
+function editcontact(data) {
+  $('#editcontact').modal('show');
+  var dataedit = {};
+  //alert(data);
+  dataedit.edit = data;
+  $("#edit-contact").unbind().on("click", function (e) {
+    e.preventDefault;
+    var name = $("#nameedit").val();
+    var surname = $("#surnameedit").val();
+    if (isBlank(name) && isBlank(surname) || isBlank(name) || isBlank(surname) || isBlank(telnum)) {
+      swal({
+        title: "กรุณาใส่ข้อมูลให้ครบ",
+        text: " ",
+        icon: "warning",
+        buttons: false,
+        timer: 1500,
+      })
     } else {
-      $(this).show();
+      dataedit.nameedit = name;
+      dataedit.surnameedit = surname;
+      dataedit.telnumedit = telnum;
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(dataedit),
+        contentType: 'application/json',
+        url: 'http://localhost:3000/editdata',
+        success: function (data) {
+          swal({
+            title: "แก้ไขข้อมูลสำเร็จ",
+            text: " ",
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+          }).then(function () {
+            $('#editcontact').modal('toggle');
+            $('#loading').modal('show');
+            setTimeout(function () {
+              $('#loading').modal('hide');
+              emptyform();
+              showdata();
+            }, 1200);
+          });
+        }
+      });
     }
   });
-});
+}

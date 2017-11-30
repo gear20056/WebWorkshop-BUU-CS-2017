@@ -62,6 +62,29 @@ app.post('/showdata', function (req, res) {
 });
 
 /************
+ * Edit Data -> Database Mongodb
+ ************/
+app.post('/editdata', function (req, res) {
+	MongoClient.connect(url, function (err, db) {
+		let myquery = {
+			Telnumber: req.body.edit
+		};
+		let newvalues = {
+			$set: {
+				Name: req.body.nameedit,
+				Surname: req.body.surnameedit
+			}
+		};
+		db.collection("webtech").updateOne(myquery, newvalues, function (err, res) {
+			console.log("1 document updated");
+			db.close();
+		});
+	});
+	res.send('success');
+});
+
+
+/************
  * Run localhost -> local:3000
  ************/
 app.listen(3000);
