@@ -93,6 +93,51 @@
       </div>
     </div>
 
+    <!-- Modal Add Contact -->
+    <div class="modal hide fade" id="addcontact" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลผู้ติดต่อ</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="example-search-input" class="col-3 col-form-label">ชื่อ</label>
+              <div class="col-8">
+                <input class="form-control" type="search" id="name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-3 col-form-label">นามสกุล</label>
+              <div class="col-8">
+                <input class="form-control" type="search" id="surname">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-3 col-form-label">เบอร์โทรศัพท์</label>
+              <div class="col-8">
+                <input class="form-control" type="search" id="telnum">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-search-input" class="col-3 col-form-label">อีเมล์</label>
+              <div class="col-8">
+                <input class="form-control" type="email" id="email" required="true">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+            <button type="button" class="btn btn-primary" id="add-contact">ยืนยัน</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Add Contact -->
+
     <!-- Modal Loaddding Contact -->
     <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true" data-keyboard="false"
       data-backdrop="static">
