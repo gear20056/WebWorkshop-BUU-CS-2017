@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongo = require('mongodb');
@@ -83,6 +84,21 @@ app.post('/editdata', function (req, res) {
 	res.send('success');
 });
 
+/************
+ * Delete Data -> Database Mongodb
+ ************/
+app.post('/deletedata', function (req, res) {
+	MongoClient.connect(url, function (err, db) {
+		let myquery = {
+			Telnumber: req.body.del
+		};
+		db.collection("webtech").deleteOne(myquery, function (err, obj) {
+			console.log("1 document deleted");
+			db.close();
+		});
+	});
+	res.send('success');
+});
 
 /************
  * Run localhost -> local:3000

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
   <style type="text/css">
     @import url('https://fonts.googleapis.com/css?family=Kanit');
     div {
@@ -30,7 +31,7 @@
         <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3SupportedContent">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="ml-3 btn navbar-btn btn-primary" href="#">Contact Book</a>
+              <a class="ml-3 btn navbar-btn btn-primary" href="#">Contact Book : รายชื่อติดต่อ</a>              
             </li>
           </ul>
         </div>
@@ -58,7 +59,7 @@
       <!-- End Contact-list From Javascript -->
     <div class="py-5 bg-dark text-white">
       <div class="container">
-        <div class="row">
+        <div class="row col-12">
           <div class="col-4 col-md-4 align-self-center">
             <p>57160667</p>
           </div>
@@ -82,7 +83,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">เพิ่มข้อมูลผู้ติดต่อ</h5>
+            <h5 class="modal-title" id="exampleModalLabel">เพิ่มรายชื่อผู้ติดต่อ</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -121,7 +122,38 @@
       </div>
     </div>
     <!-- Modal Add Contact -->
-
+        <!-- Modal Edit Contact -->
+        <div class="modal hide fade" id="editcontact" aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">แก้ไขรายชื่อผู้ติดต่อ</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group row">
+                    <label for="example-search-input" class="col-3 col-form-label">ชื่อ</label>
+                    <div class="col-8">
+                      <input class="form-control" type="search" id="nameedit">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="example-search-input" class="col-3 col-form-label">นามสกุล</label>
+                    <div class="col-8">
+                      <input class="form-control" type="search" id="surnameedit">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                  <button type="button" class="btn btn-primary" id="edit-contact">ยืนยัน</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Modal Edit Contact -->
     <!-- Modal Loaddding Contact -->
     <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="modalLabelLarge" aria-hidden="true" data-keyboard="false"
       data-backdrop="static">
